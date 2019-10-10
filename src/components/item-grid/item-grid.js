@@ -7,8 +7,27 @@ const ItemGrid = () => {
             <div className='container item-grid-block'>
                 <div className='item-grid-element'>
                     <div className='element-head'>
+                        <p className='element-name'>Country</p>
+                        <i className="fa fa-info-circle"></i>
+                    </div>
+                    <div className='element-body'>
+                        <span className='element-title'>Capital</span>
+                        <span className='element-value'>capital name</span>
+                    </div>
+                    <div className='element-body'>
+                        <span className='element-title'>Population</span>
+                        <span className='element-value'>population number</span>
+                    </div>
+                    <div className='element-body'>
+                        <span className='element-title'>Region</span>
+                        <span className='element-value'>region name</span>
+                    </div>
+                </div>
+
+                <div className='item-grid-element'>
+                    <div className='element-head'>
                         <p className='element-name'>Heading</p>
-                        <i class="fa fa-info-circle"></i>
+                        <i className="fa fa-info-circle"></i>
                     </div>
                     <div className='element-body'>
                         <span className='element-title'>QWERTY</span>
@@ -27,7 +46,7 @@ const ItemGrid = () => {
                 <div className='item-grid-element'>
                     <div className='element-head'>
                         <p className='element-name'>Heading</p>
-                        <span className='element-icon'>I</span>
+                        <i className="fa fa-info-circle"></i>
                     </div>
                     <div className='element-body'>
                         <span className='element-title'>QWERTY</span>
@@ -46,45 +65,7 @@ const ItemGrid = () => {
                 <div className='item-grid-element'>
                     <div className='element-head'>
                         <p className='element-name'>Heading</p>
-                        <span className='element-icon'>I</span>
-                    </div>
-                    <div className='element-body'>
-                        <span className='element-title'>QWERTY</span>
-                        <span className='element-value'>asdasda</span>
-                    </div>
-                    <div className='element-body'>
-                        <span className='element-title'>QWERTY</span>
-                        <span className='element-value'>234</span>
-                    </div>
-                    <div className='element-body'>
-                        <span className='element-title'>QWERTY</span>
-                        <span className='element-value'>234</span>
-                    </div>
-                </div>
-
-                <div className='item-grid-element'>
-                    <div className='element-head'>
-                        <p className='element-name'>Heading</p>
-                        <span className='element-icon'>I</span>
-                    </div>
-                    <div className='element-body'>
-                        <span className='element-title'>QWERTY</span>
-                        <span className='element-value'>asdasda</span>
-                    </div>
-                    <div className='element-body'>
-                        <span className='element-title'>QWERTY</span>
-                        <span className='element-value'>234</span>
-                    </div>
-                    <div className='element-body'>
-                        <span className='element-title'>QWERTY</span>
-                        <span className='element-value'>234</span>
-                    </div>
-                </div>
-
-                <div className='item-grid-element'>
-                    <div className='element-head'>
-                        <p className='element-name'>Heading</p>
-                        <span className='element-icon'>I</span>
+                        <i className="fa fa-info-circle"></i>
                     </div>
                     <div className='element-body'>
                         <span className='element-title'>QWERTY</span>
