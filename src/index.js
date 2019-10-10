@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import App from './components/app/app';
+import CountryService from './services/country-service';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function Index() {
+  return (
+    <div className="App">
+      <App/>
+    </div>
+  );
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const hsapi = new CountryService()
+const array = [hsapi.getResource(), hsapi.searchByName('MOLDOVA'), hsapi.searchByCapital('chisinau'), hsapi.searchByRegion('europe')]
+Promise.all(array).then(values => {
+  console.log(values)
+})
+
+ReactDOM.render(<Index />, document.getElementById('root'))

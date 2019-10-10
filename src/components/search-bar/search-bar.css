@@ -1,0 +1,28 @@
+.search-bar-section {
+    margin: 30px 0 25px
+}
+
+.search-bar {
+    min-width: 100%;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 5px lightblue;
+    transition: box-shadow 0.4s;
+}
+
+.search-bar-title {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: normal;
+}
+
+@media (max-width: 767.98px) {
+    .search-bar {
+        width: 250px;
+    }
+}
