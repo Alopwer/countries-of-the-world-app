@@ -32,7 +32,7 @@
     color: white;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
     .navbar {
         flex-direction: column;
     }
@@ -50,11 +50,11 @@
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     .navbar {
         font-size: 0.9rem;
     }
     .navbar-item {
-        padding-left: 15px;
+        padding-left: 12px;
     }
 }

@@ -1,0 +1,21 @@
+.error-block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+.error-icon {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.error-comment {
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .error-comment {
+        font-size: 1.5rem;
+    }
+}

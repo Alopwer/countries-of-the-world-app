@@ -1,8 +1,8 @@
 export default class CountryService {
     _apiBase = 'https://restcountries.eu/rest/v2';
 
-    async getResource() {
-        const res = await fetch(`${this._apiBase}/all`);
+    getResource = async (filter = 'all', value = '') => {
+        const res = await fetch(`${this._apiBase}/${filter}${value}`);
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${this._apiBase}, received ${res.status}`);
@@ -10,34 +10,34 @@ export default class CountryService {
         return await res.json();
     }
 
-    async searchByName(value) {
-        const res = await fetch(`${this._apiBase}/name/${value}`);
-
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${this._apiBase}, received ${res.status}`);
-        }
-        return await res.json();
+    async getByName(value) {
+        const country = await this.getResource('name/', value)
+        return this._transformCountryElement(country)
     }
 
-    async searchByCapital(value) {
-        const res = await fetch(`${this._apiBase}/capital/${value}`);
-
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${this._apiBase}, received ${res.status}`);
-        }
-        return await res.json();
+    async getByCapital(value) {
+        const country = await this.getResource('capital/', value)
+        return this._transformCountryElement(country)
     }
 
-    async searchByRegion(value) {
-        const res = await fetch(`${this._apiBase}/region/${value}`);
+    async getByRegion(value) {
+        const country = await this.getResource('region/', value)
+        return this._transformCountryElement(country)
+    }
 
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${this._apiBase}, received ${res.status}`);
+    _transformCountry = (country) => {
+        const [countryObj] = [...country]
+        return {
+            id: countryObj.numericCode,
+            country : countryObj.name,
+            capital : countryObj.capital,
+            population: countryObj.population,
+            region: countryObj.region,
         }
-        return await res.json();
+    }
+
+    _transformCountryElement = (country) => {
+        const [transformed] = [...country]
+        return transformed
     }
 }
-
-// const hsapi = new CountryService()
-// const array = [hsapi.getResource(), hsapi.searchByName('MOLDOVA'), hsapi.searchByCapital('chisinau'), hsapi.searchByRegion('europe')]
-// Promise.all(array).then(values => console.log(values))

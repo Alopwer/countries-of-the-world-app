@@ -45,8 +45,11 @@
 }
 
 @media (max-width: 992px) {
+    .item-details {
+        justify-content: space-around;
+    }
     .item-block {
-        flex-basis: 100%;
+        flex-basis: 80%;
     }
 }
 
