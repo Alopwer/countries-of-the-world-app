@@ -14,6 +14,8 @@ class ItemGrid extends React.Component {
         loading: true,
         error: false
     }
+
+    _allCountries = [];
     
     componentDidMount() {
         const { getData } = this.props;
@@ -23,17 +25,11 @@ class ItemGrid extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps !== this.props) {
-            this.updateCountries(this.props.matchPattern);
+        if (prevProps.matchPattern !== this.props.matchPattern) {
+            this.setState((_, props) => ({
+                countries : this._allCountries.filter(country => country.name.match(props.matchPattern))
+            }))
         }
-    }
-
-    updateCountries = (matchValue = '') => {
-        const changeState = this.state.countries.filter(country => country.name.match(matchValue))
-        console.log(changeState)
-        this.setState({
-            countries : changeState
-        })
     }
 
     onCountryLoaded = (countries) => {
@@ -42,6 +38,7 @@ class ItemGrid extends React.Component {
             loading: false,
             error: false 
          })
+        this._allCountries = countries;
     }
 
     onError = (error) => {
@@ -52,11 +49,11 @@ class ItemGrid extends React.Component {
     }
     
     renderItems(countriesArr) {
-        return countriesArr.map((country, i) => {
+        return countriesArr.map(country => {
             return (
                 <GridElement 
                     country={country} 
-                    key={i}
+                    key={country.name}
                     onCountrySelected={this.props.onCountrySelected}
                 />
             )
@@ -64,7 +61,6 @@ class ItemGrid extends React.Component {
     }
 
     render() {
-
         const { countries, loading, error } = this.state;
 
         const hasData = !(loading || error)

@@ -23,6 +23,10 @@ class App extends React.Component {
     }
 
     matchCountries = (pattern) => {
+        if (pattern) {
+            pattern = pattern[0].toUpperCase() + pattern.slice(1)
+            
+        }
         this.setState({
             lookingFor : pattern
         })
@@ -38,7 +42,7 @@ class App extends React.Component {
                     getData={this.swapiService.getResource}
                     matchPattern={this.state.lookingFor}
                 />
-                <ItemDetails countryId={this.state.selectedCountry}/>
+                <ItemDetails countryName={this.state.selectedCountry}/>
             </div>
         )
     }
