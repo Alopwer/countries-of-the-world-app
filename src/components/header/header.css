@@ -14,6 +14,12 @@
     font-size: 1.6rem;
 }
 
+.navbar-text {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
 .navbar-list {
     list-style: none;
     display: flex;

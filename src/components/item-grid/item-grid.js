@@ -5,27 +5,23 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 import GridElement from '../item-grid-element';
 
 const ItemGrid = (props) => {
-    const [countries, setCountries] = useState([])
     const [countriesFiltered, setCountriesFiltered] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        props.getData()
-            .then(onCountryLoaded)
-            .catch(onError)
-    }, [])
+        if (props.countries) {
+            setCountriesFiltered(props.countries)
+            setError(false)
+            setLoading(false)
+        } else {
+            onError()
+        }
+    }, [props.countries])
 
     useEffect(() => {
-        setCountriesFiltered(countries.filter(country => country.name.match(props.matchPattern)))
+        setCountriesFiltered(props.countries.filter(country => country.name.match(props.matchPattern)))
     }, [props.matchPattern])
-
-    const onCountryLoaded = async (countriesData) => {
-        setCountries(countriesData)
-        setCountriesFiltered(countriesData)
-        setError(false)
-        setLoading(false)
-    }
 
     const onError = (error) => {
         setError(true)
@@ -38,7 +34,6 @@ const ItemGrid = (props) => {
                 <GridElement 
                     country={country} 
                     key={country.name}
-                    onCountrySelected={props.onCountrySelected}
                 />
             )
         )

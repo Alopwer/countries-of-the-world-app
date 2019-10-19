@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
@@ -6,37 +7,8 @@ const Header = () => {
         <div className='navbar-section'>
             <div className='container'>
                 <nav className='navbar'>
-                    <a href='#' className='navbar-main'>Countries of the world</a>
-                        <div class="dropdown">
-                            <button class="dropbtn">Dropdown</button>
-                            <div class="dropdown-content">
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
-                            </div>
-                        </div> 
-                    <div>
-                        <ul className='navbar-list'>
-                            <li className='navbar-item'>
-                                <a href="#" className='navbar-link'>Europe</a>
-                            </li>
-                            <li className='navbar-item'>
-                                <a href="#" className='navbar-link'>Asia</a>
-                            </li>
-                            <li className='navbar-item'>
-                                <a href="#" className='navbar-link'>Northern America</a>
-                            </li>
-                            <li className='navbar-item'>
-                                <a href="#" className='navbar-link'>Southern America</a>
-                            </li>
-                            <li className='navbar-item'>
-                                <a href="#" className='navbar-link'>Africa</a>
-                            </li>
-                            <li className='navbar-item'>
-                                <a href="#" className='navbar-link'>Oceania</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <Link to='/' className='navbar-main'>Countries of the world</Link>
+                    <Link to='/about' className='navbar-text'>About</Link>
                 </nav>
             </div>
         </div>

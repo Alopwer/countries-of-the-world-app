@@ -1,49 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './item-details.css';
 import CountryService from '../../services/country-service';
 
-class ItemDetails extends React.Component {
+const ItemDetails = (props) => {
+    const countryService = new CountryService();
+    const [country, setCountry] = useState('');
+    const { countryName } = props
 
-    countryService = new CountryService();
+    useEffect(() => {
+        updateCountry()
+    }, [countryName])
 
-    state = {
-        country: null
-    }
-
-    componentDidMount() {
-        this.updateCountry()
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.countryName !== prevProps.countryName) {
-            this.updateCountry();
-        }
-    }
-
-    updateCountry() {
-        const { countryName } = this.props
-        if (!countryName) {
-            return
-        }
-
-        this.countryService
+    const updateCountry = () => {
+        countryService
             .getByName(countryName)
             .then((country) => {
-                this.setState({
-                    country
-                })
+                setCountry(country)
             })
     }
 
-    render() {
-        if (!this.state.country) return (<p>No country</p>)
-        return (
-            <ItemView country={this.state.country}/>
-        )
-    }
+    return (
+        <ItemView country={country}/>
+    )
 }
 
-const ItemView = ({country}) => {
+const ItemView = ({ country }) => {
     return (
         <div className='item-details-section'>
             <div className='container'>

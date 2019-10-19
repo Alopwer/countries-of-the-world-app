@@ -4,7 +4,9 @@
     margin: 10px 0;
     width: 30%;
     overflow: hidden;
-    cursor: pointer
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
 }
 
 .item-grid-element:hover {
