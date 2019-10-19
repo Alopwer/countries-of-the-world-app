@@ -1,83 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './item-grid.css';
-import CountryService from '../../services/country-service';
 import Spinner from '../spinner/index';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import GridElement from '../item-grid-element';
 
-class ItemGrid extends React.Component {
+const ItemGrid = (props) => {
+    const [countries, setCountries] = useState([])
+    const [countriesFiltered, setCountriesFiltered] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
-    countryService = new CountryService();
+    useEffect(() => {
+        props.getData()
+            .then(onCountryLoaded)
+            .catch(onError)
+    }, [])
 
-    state = {
-        countries: [],
-        loading: true,
-        error: false
+    useEffect(() => {
+        setCountriesFiltered(countries.filter(country => country.name.match(props.matchPattern)))
+    }, [props.matchPattern])
+
+    const onCountryLoaded = async (countriesData) => {
+        setCountries(countriesData)
+        setCountriesFiltered(countriesData)
+        setError(false)
+        setLoading(false)
     }
 
-    _allCountries = [];
-    
-    componentDidMount() {
-        const { getData } = this.props;
-        getData()
-            .then(this.onCountryLoaded)
-            .catch(this.onError)
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.matchPattern !== this.props.matchPattern) {
-            this.setState((_, props) => ({
-                countries : this._allCountries.filter(country => country.name.match(props.matchPattern))
-            }))
-        }
-    }
-
-    onCountryLoaded = (countries) => {
-        this.setState({ 
-            countries,
-            loading: false,
-            error: false 
-         })
-        this._allCountries = countries;
-    }
-
-    onError = (error) => {
-        this.setState({
-            error: true,
-            loading: false
-        })
+    const onError = (error) => {
+        setError(true)
+        setLoading(false)
     }
     
-    renderItems(countriesArr) {
-        return countriesArr.map(country => {
-            return (
+    const renderItems = (countriesArr) => 
+        countriesArr.map(country => 
+            (
                 <GridElement 
                     country={country} 
                     key={country.name}
-                    onCountrySelected={this.props.onCountrySelected}
+                    onCountrySelected={props.onCountrySelected}
                 />
             )
-        })
-    }
-
-    render() {
-        const { countries, loading, error } = this.state;
-
-        const hasData = !(loading || error)
-        const items = this.renderItems(countries)
-
-        const errorMessage = error ? <ErrorIndicator /> : null
-        const spinner = loading ? <Spinner /> : null;
-        const content = hasData ? items : null
-        
-        return (
-            <div className='item-grid-section'>
-                <div className='container item-grid-block'>
-                    {spinner || content || errorMessage}
-                </div>
-            </div>
         )
-    }
+        
+    const hasData = !(loading || error)
+    const items = renderItems(countriesFiltered)
+    
+    const errorMessage = error ? <ErrorIndicator /> : null
+    const spinner = loading ? <Spinner /> : null;
+    const content = hasData ? items : null
+
+    return (
+        <div className='item-grid-section'>
+            <div className='container item-grid-block'>
+                {spinner || content || errorMessage}
+            </div>
+        </div>
+    )
 }
 
 export default ItemGrid

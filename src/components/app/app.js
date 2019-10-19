@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './app.css';
 
 import Header from '../header/header';
@@ -7,45 +7,33 @@ import ItemGrid from '../item-grid/item-grid';
 import SearchBar from '../search-bar/search-bar';
 import SwapiService from '../../services/country-service';
 
-class App extends React.Component {
+const App = () => {
+    const swapiService = new SwapiService();
+    const [selectedCountry, setSelectedCountry] = useState(null)
+    const [lookingPattern, setLookingPattern] = useState('')
 
-    swapiService = new SwapiService();
-
-    state = {
-        selectedCountry: null,
-        lookingFor: ''
+    const onCountrySelected = (name) => {
+        setSelectedCountry(name)
     }
 
-    onCountrySelected = (name) => {
-        this.setState({
-            selectedCountry : name
-        })
+    const matchCountries = (pattern) => {
+        const regExp = new RegExp('^' + pattern, 'i')
+        setLookingPattern(regExp)
+        console.log(regExp)
     }
 
-    matchCountries = (pattern) => {
-        if (pattern) {
-            pattern = pattern[0].toUpperCase() + pattern.slice(1)
-            
-        }
-        this.setState({
-            lookingFor : pattern
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                <Header/>
-                <SearchBar matchCountries={this.matchCountries}/>
-                <ItemGrid 
-                    onCountrySelected={this.onCountrySelected}
-                    getData={this.swapiService.getResource}
-                    matchPattern={this.state.lookingFor}
-                />
-                <ItemDetails countryName={this.state.selectedCountry}/>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Header/>
+            <SearchBar matchCountries={matchCountries}/>
+            <ItemGrid 
+                onCountrySelected={onCountrySelected}
+                getData={swapiService.getResource}
+                matchPattern={lookingPattern}
+            />
+            <ItemDetails countryName={selectedCountry}/>
+        </div>
+    )
 }
 
 export default App

@@ -7,6 +7,14 @@ const Header = () => {
             <div className='container'>
                 <nav className='navbar'>
                     <a href='#' className='navbar-main'>Countries of the world</a>
+                        <div class="dropdown">
+                            <button class="dropbtn">Dropdown</button>
+                            <div class="dropdown-content">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div> 
                     <div>
                         <ul className='navbar-list'>
                             <li className='navbar-item'>
