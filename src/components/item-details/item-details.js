@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './item-details.css';
 import CountryService from '../../services/country-service';
+import Spinner from '../spinner';
 
 const ItemDetails = (props) => {
     const countryService = new CountryService();
     const [country, setCountry] = useState('');
-    const { countryName } = props
-
+    const [code, setCode] = useState(props.match.params.code);
+    
     useEffect(() => {
+        setCode(props.match.params.code)
         updateCountry()
-    }, [countryName])
+    }, [])
 
     const updateCountry = () => {
         countryService
-            .getByName(countryName)
+            .getByName(code.toLowerCase())
             .then((country) => {
                 setCountry(country)
             })
@@ -35,11 +37,11 @@ const ItemView = ({ country }) => {
                         <h3 className='item-heading'>Main Info</h3>
                         <div className='item-info'>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Official name</span>
+                                <span className='item-info-name'>Official Name</span>
                                 <span className='item-info-value'>{country.name}</span>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Native name</span>
+                                <span className='item-info-name'>Native Name</span>
                                 <span className='item-info-value'>{country.nativeName}</span>
                             </div>
                             <div className='item-info-row'>

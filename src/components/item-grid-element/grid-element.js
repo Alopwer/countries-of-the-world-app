@@ -5,9 +5,9 @@ import { CountryContext } from '../country-context/country-context';
 
 const GridElement = (props) => {
     const { country } = props
-    const onCountrySelected = useContext(CountryContext)
+    // const onCountrySelected = useContext(CountryContext)
     return (
-        <Link to={`/${country.alpha3Code}`} className='item-grid-element' onClick={() => onCountrySelected(country.name, country.alpha3Code)}>
+        <Link to={`/${country.alpha3Code}`} className='item-grid-element'>
                 <div className='element-head'>
                     <span className='element-name'>{country.name}</span>
                     <i className="fa fa-info-circle"></i>

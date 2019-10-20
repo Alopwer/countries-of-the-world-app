@@ -14,9 +14,6 @@ const App = () => {
   const countryService = new CountryService()
 
   const [countries, setCountries] = useState(null)
-  const [selectedCountry, setSelectedCountry] = useState('')
-
-  const [code, setCode] = useState(null)
   const [lookingPattern, setLookingPattern] = useState('')
 
   useEffect(() => {
@@ -26,11 +23,6 @@ const App = () => {
       })
       .catch(() => setCountries(null))
   }, [])
-
-  const onCountrySelected = (countryName, countryCode) => {
-    setSelectedCountry(countryName)
-    setCode(countryCode)
-  }
 
   const matchCountries = (pattern) => {
     const regExp = new RegExp(`^${pattern}`, 'i')
@@ -46,12 +38,12 @@ const App = () => {
         <Header />
         <Route exact path="/">
           <SearchBar matchCountries={matchCountries} />
-          <CountryContext.Provider value={onCountrySelected}>
+          <CountryContext.Provider>
             {grid}
           </CountryContext.Provider>
         </Route>
-        <Route exact path={`/${code}`}>
-          <ItemDetailsRouter countryName={selectedCountry} />
+        <Route exact path='/:code'>
+          <ItemDetailsRouter />
         </Route>
         <Route path="/about" component={About} />
       </Router>

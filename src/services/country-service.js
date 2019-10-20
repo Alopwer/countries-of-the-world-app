@@ -11,7 +11,7 @@ export default class CountryService {
     }
 
     async getByName(value) {
-        const country = await this.getResource('name/', value)
+        const country = await this.getResource('alpha/', value)
         return this._transformCountryElement(country)
     }
 
@@ -25,19 +25,18 @@ export default class CountryService {
         return this._transformCountryElement(country)
     }
 
-    _transformCountry = (country) => {
-        const [countryObj] = [...country]
-        return {
-            id: countryObj.numericCode,
-            country : countryObj.name,
-            capital : countryObj.capital,
-            population: countryObj.population,
-            region: countryObj.region,
-        }
-    }
+    // _transformCountry = (country) => {
+    //     const [countryObj] = [...country]
+    //     return {
+    //         id: countryObj.numericCode,
+    //         country : countryObj.name,
+    //         capital : countryObj.capital,
+    //         population: countryObj.population,
+    //         region: countryObj.region,
+    //     }
+    // }
 
     _transformCountryElement = (country) => {
-        const [transformed] = [...country]
-        return transformed
+        return country
     }
 }
