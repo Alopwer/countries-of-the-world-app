@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './grid-element.css';
-import { CountryContext } from '../country-context/country-context';
 
 const GridElement = (props) => {
     const { country } = props
-    // const onCountrySelected = useContext(CountryContext)
     return (
         <Link to={`/${country.alpha3Code}`} className='item-grid-element'>
                 <div className='element-head'>

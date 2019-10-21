@@ -15,11 +15,13 @@ const App = () => {
 
   const [countries, setCountries] = useState(null)
   const [lookingPattern, setLookingPattern] = useState('')
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     countryService.getResource()
       .then((data) => {
         setCountries(data)
+        setLoaded(true)
       })
       .catch(() => setCountries(null))
   }, [])
@@ -43,7 +45,7 @@ const App = () => {
           </CountryContext.Provider>
         </Route>
         <Route exact path='/:code'>
-          <ItemDetailsRouter />
+          <ItemDetailsRouter isLoaded={loaded} />
         </Route>
         <Route path="/about" component={About} />
       </Router>

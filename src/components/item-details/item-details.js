@@ -6,23 +6,28 @@ import Spinner from '../spinner';
 const ItemDetails = (props) => {
     const countryService = new CountryService();
     const [country, setCountry] = useState('');
-    const [code, setCode] = useState(props.match.params.code);
+    const code = props.match.params.code;
     
     useEffect(() => {
-        setCode(props.match.params.code)
-        updateCountry()
-    }, [])
+        if (props.isLoaded) {
+          updateCountry(props.match.params.code);
+        }
+      }, []);
 
     const updateCountry = () => {
         countryService
-            .getByName(code.toLowerCase())
+            .getByCode(code.toLowerCase())
             .then((country) => {
                 setCountry(country)
             })
     }
 
+    const view = props.isLoaded ?  <ItemView country={country}/> : <Spinner />
+
     return (
-        <ItemView country={country}/>
+        <div>
+            {view}
+        </div>
     )
 }
 
