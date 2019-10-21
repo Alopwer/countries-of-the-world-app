@@ -35,7 +35,7 @@
 
 .item-block {
     margin-top: 20px;
-    min-width: 280px
+    min-width: 200px
 }
 
 .item-heading {
@@ -50,7 +50,7 @@
 }
 
 .item-info-name {
-    flex-basis: 55%;
+    flex-basis: 70%;
 }
 
 .item-image-block {
@@ -64,12 +64,14 @@
 
 @media (max-width: 1200px) {
     .item-details {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-template-rows: auto;  
         grid-template-areas: 
-        "names languages"
-        "codes georgraphy"
-        "image image";
+        "names"
+        "languages"
+        "codes"
+        "georgraphy"
+        "image";
     }
     .item-main-title {
         text-align: center;
