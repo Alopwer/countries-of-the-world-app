@@ -4,8 +4,9 @@ import './grid-element.css';
 
 const GridElement = (props) => {
     const { country } = props
+    const { alpha3Code : code } = country
     return (
-        <Link to={`/${country.alpha3Code}`} className='item-grid-element'>
+        <Link to={`/${code.toLowerCase()}`} className='item-grid-element'>
                 <div className='element-head'>
                     <span className='element-name'>{country.name}</span>
                     <i className="fa fa-info-circle"></i>
