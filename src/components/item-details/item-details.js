@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './item-details.css';
 import CountryService from '../../services/country-service';
 import Spinner from '../spinner';
+import Accordion from '../item-details-dropdown';
 
 const ItemDetails = (props) => {
     const countryService = new CountryService();
@@ -23,12 +24,13 @@ const ItemDetails = (props) => {
     }
 
     return (
-        <ItemView country={country}/>
+        <React.Fragment>
+            {country ? <ItemView country={country}/> : <Spinner />}
+        </React.Fragment>
     )
 }
 
 const ItemView = ({ country }) => {
-    if (!country) return <Spinner />
     return (
         <div className='item-details-section'>
             {console.log(country)}
@@ -40,21 +42,18 @@ const ItemView = ({ country }) => {
                         <h3 className='item-heading'>Names</h3>
                         <div className='item-info'>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Official Name</span>
-                                <span className='item-info-value'>{country.name}</span>
+                                <p className='item-info-name'>Official Name</p>
+                                <p className='item-info-value'>{country.name || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Common Name</span>
-                                <span className='item-info-value'>{country.nativeName}</span>
+                                <p className='item-info-name'>Common Name</p>
+                                <p className='item-info-value'>{country.nativeName || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Alternative Spellings</span>
-                                <span className='item-info-value'>{country.altSpellings.join(', ')}</span>
+                                <p className='item-info-name'>Alternative Spellings</p>
+                                <p className='item-info-value'>{country.altSpellings.join(', ') || '-'}</p>
                             </div>
-                            <div className='item-info-row'>
-                                <span className='item-info-name'>Translations</span>
-                                <span className='item-info-value'>{Object.values(country.translations)}</span>
-                            </div>
+                            <Accordion title='Translations' value={country.translations || '-'}/>
                         </div>
                     </div>
 
@@ -66,24 +65,24 @@ const ItemView = ({ country }) => {
                         <h3 className='item-heading'>Codes</h3>
                         <div className='item-info'>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>ISO 3166-1 alpha-2</span>
-                                <span className='item-info-value'>{country.alpha2Code}</span>
+                                <p className='item-info-name'>ISO 3166-1 alpha-2</p>
+                                <p className='item-info-value'>{country.alpha2Code || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>ISO 3166-1 alpha-3</span>
-                                <span className='item-info-value'>{country.alpha3Code}</span>
+                                <p className='item-info-name'>ISO 3166-1 alpha-3</p>
+                                <p className='item-info-value'>{country.alpha3Code || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>ISO 3166-1 numeric</span>
-                                <span className='item-info-value'>{country.numericCode}</span>
+                                <p className='item-info-name'>ISO 3166-1 numeric</p>
+                                <p className='item-info-value'>{country.numericCode || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>International calling code</span>
-                                <span className='item-info-value'>{country.callingCodes}</span>
+                                <p className='item-info-name'>International calling code</p>
+                                <p className='item-info-value'>{country.callingCodes || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Top level domain</span>
-                                <span className='item-info-value'>{country.topLevelDomain}</span>
+                                <p className='item-info-name'>Top level domain</p>
+                                <p className='item-info-value'>{country.topLevelDomain || '-'}</p>
                             </div>
                         </div>
                     </div>
@@ -92,32 +91,32 @@ const ItemView = ({ country }) => {
                         <h3 className='item-heading'>Geography</h3>
                         <div className='item-info'>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Region</span>
-                                <span className='item-info-value'>{country.region}</span>
+                                <p className='item-info-name'>Region</p>
+                                <p className='item-info-value'>{country.region || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Subregion</span>
-                                <span className='item-info-value'>{country.subregion}</span>
+                                <p className='item-info-name'>Subregion</p>
+                                <p className='item-info-value'>{country.subregion || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Capital</span>
-                                <span className='item-info-value'>{country.capital}</span>
+                                <p className='item-info-name'>Capital</p>
+                                <p className='item-info-value'>{country.capital || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Demonym</span>
-                                <span className='item-info-value'>{country.demonym}</span>
+                                <p className='item-info-name'>Demonym</p>
+                                <p className='item-info-value'>{country.demonym || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Lat/Lng</span>
-                                <span className='item-info-value'>{country.latlng}</span>
+                                <p className='item-info-name'>Lat/Lng</p>
+                                <p className='item-info-value'>{country.latlng.map(el => el.toFixed(2)).join(' / ')}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Area</span>
-                                <span className='item-info-value'>{country.area}</span>
+                                <p className='item-info-name'>Area</p>
+                                <p className='item-info-value'>{country.area || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Borders</span>
-                                <span className='item-info-value'>{country.borders}</span>
+                                <p className='item-info-name'>Borders</p>
+                                <p className='item-info-value'>{country.borders.join(', ') || '-'}</p>
                             </div>
                         </div>
                     </div>
@@ -126,12 +125,12 @@ const ItemView = ({ country }) => {
                         <h3 className='item-heading'>Language</h3>
                         <div className='item-info'>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Native Language</span>
-                                <span className='item-info-value'>{Object.values(country.languages[0])}</span>
+                                <p className='item-info-name'>Native Language</p>
+                                <p className='item-info-value'>{country.languages[0].name || '-'}</p>
                             </div>
                             <div className='item-info-row'>
-                                <span className='item-info-name'>Languages</span>
-                                <span className='item-info-value'>{Object.values(...country.languages)}</span>
+                                <p className='item-info-name'>Languages</p>
+                                <p className='item-info-value'>{Object.values(...country.languages) || '-'}</p>
                             </div>
                         </div>
                     </div>

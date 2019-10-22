@@ -20,8 +20,15 @@
     font-weight: normal;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
     .search-bar {
-        width: 250px;
+        width: 220px;
+    }
+}
+
+@media (max-width: 576px) {
+    .search-bar-title {
+        text-align: center;
+        font-size: 1.7rem;
     }
 }
