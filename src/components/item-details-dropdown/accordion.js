@@ -30,12 +30,16 @@ const Accordion = (props) => {
 }
 
 const Content = ({ value }) => {
-    const items = Array.from(Object.entries(value)).map(item => (
-        <div className='accordion-item item-info-row' key={item[0]}>
-            <p className='item-info-name'>{item[0]}</p>
-            <p className='item-info-value'>{item[1]}</p>
-        </div>
-    ))
+    const items = value.map(item => Object.entries(item).map(item => {
+        if (item[0] === 'name' || /^\w{2}$/.test(item[0])) {
+            return (
+                <div className='accordion-item item-info-row' key={item[0]}>
+                    <p className='item-info-name'>{item[0] === 'name' ? '' : item[0]}</p>
+                    <p className='item-info-value'>{item[1]}</p>
+                </div>
+            )
+        }
+    }))
 
     return (
         <React.Fragment>

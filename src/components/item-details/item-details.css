@@ -1,12 +1,10 @@
 .item-details {
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: 60% 1fr;
-    grid-template-rows: auto;  
-    grid-template-areas: 
-    "names image"
-    "codes geography"
-    "languages ."
+    display: flex;
+}
+
+.left-block {
+    flex-basis: 80%;
+    margin-right: 20px;
 }
 
 #names-block {
@@ -54,6 +52,10 @@
     border-bottom: none;
 }
 
+.item-info-name {
+    margin-right: 10%;
+}
+
 .item-info-value {
     margin-left: auto;
     text-align: right;
@@ -70,31 +72,19 @@
 
 @media (max-width: 1200px) {
     .item-details {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;  
-        grid-template-areas: 
-        "names"
-        "languages"
-        "codes"
-        "georgraphy"
-        "image";
+        flex-direction: column;
+    }
+    .left-block {
+        margin-right: 0px;
+    }
+    .right-block {
+        display: flex;
+        flex-direction: column-reverse;
     }
     .item-main-title {
         text-align: center;
     }
     .item-image-block {
-        width: 60%;
-    }
-}
-
-@media (max-width: 992px) {
-    .item-image-block {
         width: 80%;
     }
 }
-
-@media (max-width: 768px) {
-
-}
-
-

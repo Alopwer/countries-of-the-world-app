@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-dom'
 import './app.css'
 import Header from '../header/index'
 import ItemDetails from '../item-details/index'
@@ -38,16 +38,21 @@ const App = () => {
     <React.Fragment>
       <Router>
         <Header />
-        <Route exact path="/">
-          <SearchBar matchCountries={matchCountries} />
-          <CountryContext.Provider>
-            {grid}
-          </CountryContext.Provider>
-        </Route>
-        <Route exact path='/:code'>
-          <ItemDetailsRouter isLoaded={loaded} />
-        </Route>
-        <Route path="/about" component={About} />
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path='/:code'>
+            <ItemDetailsRouter isLoaded={loaded} />
+          </Route>
+          <Route path="/">
+            <SearchBar matchCountries={matchCountries} />
+            <CountryContext.Provider>
+              {grid}
+            </CountryContext.Provider>
+          </Route>
+        </Switch>
+        {/* <Route exact path="/about" component={About} /> */}
       </Router>
     </React.Fragment>
   )
