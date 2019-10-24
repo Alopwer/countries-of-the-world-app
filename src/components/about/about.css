@@ -1,0 +1,26 @@
+.about-header {
+    margin: 10px 0 20px;
+}
+
+.about-title {
+    font-size: 1.8rem;
+    margin: 5px 0;
+    font-weight: normal;
+}
+
+.about-text {
+
+}
+
+.about-link {
+    color: orange;
+    text-decoration: none;
+}
+
+.about-link:hover {
+    text-decoration: underline;
+}
+
+.about-info {
+
+}
